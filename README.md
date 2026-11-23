@@ -44,7 +44,7 @@ sudo apt install -y openjdk-21-jdk git curl xz-utils docker.io docker-compose-v2
 sudo usermod -aG docker "$USER"      # then log out and in once, so Docker works without sudo
 
 # kitout
-git clone https://github.com/<owner>/kitout.git ~/kitout
+git clone https://github.com/kaywaman/kitout.git ~/kitout
 cd ~/kitout
 ./install.sh                         # builds once; fetches Maven 3.9 and Node.js 22 if Ubuntu's are too old
 ```
