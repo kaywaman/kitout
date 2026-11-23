@@ -21,4 +21,4 @@ kitout is maintained in spare time, without guaranteed response or fix times. Re
   cloned from the configured git host. A team file with anything that looks like a credential is refused.
 - **Commands** run with argument lists, never through a shell, so no input can change what runs.
 
-Supported versions: the latest release.
+Supported versions: Only the latest release; there are no backports.
