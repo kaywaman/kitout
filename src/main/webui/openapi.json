@@ -1,0 +1,4096 @@
+{
+  "components" : {
+    "schemas" : {
+      "AddedLibrariesView" : {
+        "properties" : {
+          "added" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "AddedServicesView" : {
+        "properties" : {
+          "added" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "loaded" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "Build" : {
+        "properties" : {
+          "nativeContainerBuild" : {
+            "type" : "boolean"
+          },
+          "nativeMinFreeMemoryMb" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "profiles" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "BuildBatchRequest" : {
+        "properties" : {
+          "mode" : {
+            "type" : "string"
+          },
+          "profile" : {
+            "type" : "string"
+          },
+          "serviceIds" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "skipTests" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "BuildBatchView" : {
+        "properties" : {
+          "skipped" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "started" : {
+            "items" : {
+              "$ref" : "#/components/schemas/BuildView"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "BuildIdsRequest" : {
+        "properties" : {
+          "ids" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "BuildRemovalView" : {
+        "properties" : {
+          "kept" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "removed" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "BuildRequestView" : {
+        "properties" : {
+          "mode" : {
+            "type" : "string"
+          },
+          "profile" : {
+            "type" : "string"
+          },
+          "skipTests" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "BuildView" : {
+        "properties" : {
+          "createdAt" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "explanation" : {
+            "$ref" : "#/components/schemas/ExplanationView"
+          },
+          "finishedAt" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "mode" : {
+            "type" : "string"
+          },
+          "notRemovable" : {
+            "type" : "string"
+          },
+          "outputNote" : {
+            "type" : "string"
+          },
+          "prodProfile" : {
+            "type" : "boolean"
+          },
+          "profile" : {
+            "type" : "string"
+          },
+          "queuePosition" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "removable" : {
+            "type" : "boolean"
+          },
+          "serviceId" : {
+            "type" : "string"
+          },
+          "serviceName" : {
+            "type" : "string"
+          },
+          "skipTests" : {
+            "type" : "boolean"
+          },
+          "startedAt" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "version" : {
+            "type" : "string"
+          },
+          "waitingFor" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "CheckView" : {
+        "properties" : {
+          "action" : {
+            "type" : "string"
+          },
+          "advisory" : {
+            "type" : "boolean"
+          },
+          "checkId" : {
+            "type" : "string"
+          },
+          "detail" : {
+            "type" : "string"
+          },
+          "fix" : {
+            "type" : "string"
+          },
+          "items" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "severity" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "CleanupOutcomeView" : {
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          },
+          "serviceId" : {
+            "type" : "string"
+          },
+          "serviceName" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "CloneCandidateView" : {
+        "properties" : {
+          "alreadyLocal" : {
+            "type" : "boolean"
+          },
+          "defaultBranch" : {
+            "type" : "string"
+          },
+          "fullPath" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "target" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "CloneItemRequest" : {
+        "properties" : {
+          "fullPath" : {
+            "type" : "string"
+          },
+          "light" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "CloneItemView" : {
+        "properties" : {
+          "fullPath" : {
+            "type" : "string"
+          },
+          "light" : {
+            "type" : "boolean"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "CloneJobView" : {
+        "properties" : {
+          "finished" : {
+            "type" : "boolean"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "items" : {
+            "items" : {
+              "$ref" : "#/components/schemas/CloneItemView"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "CloneRequest" : {
+        "properties" : {
+          "items" : {
+            "items" : {
+              "$ref" : "#/components/schemas/CloneItemRequest"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "ComposeBrowseView" : {
+        "properties" : {
+          "files" : {
+            "items" : {
+              "$ref" : "#/components/schemas/ComposeCandidateView"
+            },
+            "type" : "array"
+          },
+          "folders" : {
+            "items" : {
+              "$ref" : "#/components/schemas/FolderEntryView"
+            },
+            "type" : "array"
+          },
+          "home" : {
+            "type" : "string"
+          },
+          "parent" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ComposeCandidateView" : {
+        "properties" : {
+          "compose" : {
+            "type" : "boolean"
+          },
+          "environment" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "picked" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "ComposeEnvironmentView" : {
+        "properties" : {
+          "autoStart" : {
+            "type" : "boolean"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "downloaded" : {
+            "type" : "boolean"
+          },
+          "file" : {
+            "type" : "string"
+          },
+          "files" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "folder" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "lastJob" : {
+            "$ref" : "#/components/schemas/ComposeJobView"
+          },
+          "missing" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "picked" : {
+            "type" : "boolean"
+          },
+          "profiles" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "running" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "team" : {
+            "type" : "boolean"
+          },
+          "total" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "ComposeJobView" : {
+        "properties" : {
+          "action" : {
+            "type" : "string"
+          },
+          "environment" : {
+            "type" : "string"
+          },
+          "exitCode" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "finishedAt" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "startedAt" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ContainerView" : {
+        "properties" : {
+          "composeProject" : {
+            "type" : "string"
+          },
+          "environment" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "image" : {
+            "type" : "string"
+          },
+          "kitoutService" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "ports" : {
+            "type" : "string"
+          },
+          "state" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "CredentialStatusView" : {
+        "properties" : {
+          "fallbackLocation" : {
+            "type" : "string"
+          },
+          "hasFallbackToken" : {
+            "type" : "boolean"
+          },
+          "host" : {
+            "type" : "string"
+          },
+          "source" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "CurrentBuildView" : {
+        "properties" : {
+          "attemptId" : {
+            "type" : "string"
+          },
+          "builtAt" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "mode" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "removable" : {
+            "type" : "boolean"
+          },
+          "serviceId" : {
+            "type" : "string"
+          },
+          "serviceName" : {
+            "type" : "string"
+          },
+          "sizeBytes" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "usedBy" : {
+            "type" : "string"
+          },
+          "version" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "CurrentBuildsRequest" : {
+        "properties" : {
+          "items" : {
+            "items" : {
+              "$ref" : "#/components/schemas/Item"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "Docker" : {
+        "properties" : {
+          "composeDirs" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "composeFiles" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "keepImageVersions" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "DockerOverviewView" : {
+        "properties" : {
+          "available" : {
+            "type" : "boolean"
+          },
+          "containers" : {
+            "items" : {
+              "$ref" : "#/components/schemas/ContainerView"
+            },
+            "type" : "array"
+          },
+          "environments" : {
+            "items" : {
+              "$ref" : "#/components/schemas/ComposeEnvironmentView"
+            },
+            "type" : "array"
+          },
+          "folders" : {
+            "items" : {
+              "$ref" : "#/components/schemas/PathStatusView"
+            },
+            "type" : "array"
+          },
+          "pickedFiles" : {
+            "items" : {
+              "$ref" : "#/components/schemas/PathStatusView"
+            },
+            "type" : "array"
+          },
+          "problem" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "Doctor" : {
+        "properties" : {
+          "embeddedCredentialsAsError" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "DoctorReportView" : {
+        "properties" : {
+          "blocksStart" : {
+            "type" : "boolean"
+          },
+          "errors" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "results" : {
+            "items" : {
+              "$ref" : "#/components/schemas/CheckView"
+            },
+            "type" : "array"
+          },
+          "warnings" : {
+            "format" : "int64",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "EnvImportRequest" : {
+        "properties" : {
+          "text" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "EnvImportView" : {
+        "properties" : {
+          "added" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "secrets" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "skipped" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "EnvRequest" : {
+        "properties" : {
+          "variables" : {
+            "items" : {
+              "$ref" : "#/components/schemas/EnvVarView"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "EnvVarView" : {
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "secret" : {
+            "type" : "boolean"
+          },
+          "set" : {
+            "type" : "boolean"
+          },
+          "use" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ExplanationView" : {
+        "properties" : {
+          "cause" : {
+            "type" : "string"
+          },
+          "fix" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "FileCheckView" : {
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "ok" : {
+            "type" : "boolean"
+          },
+          "problems" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "FolderEntryView" : {
+        "properties" : {
+          "gitRepository" : {
+            "type" : "boolean"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "quarkusProject" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "FolderListingView" : {
+        "properties" : {
+          "entries" : {
+            "items" : {
+              "$ref" : "#/components/schemas/FolderEntryView"
+            },
+            "type" : "array"
+          },
+          "home" : {
+            "type" : "string"
+          },
+          "parent" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "truncated" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "FolderPreviewProjectView" : {
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "port" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "FolderPreviewView" : {
+        "properties" : {
+          "hiddenPaths" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "outsideTeam" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "projects" : {
+            "items" : {
+              "$ref" : "#/components/schemas/FolderPreviewProjectView"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "FoldersRequest" : {
+        "properties" : {
+          "folders" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "GitLab" : {
+        "properties" : {
+          "cloneProtocol" : {
+            "type" : "string"
+          },
+          "host" : {
+            "type" : "string"
+          },
+          "imagePath" : {
+            "type" : "string"
+          },
+          "kind" : {
+            "type" : "string"
+          },
+          "provider" : {
+            "type" : "string"
+          },
+          "registryHost" : {
+            "type" : "string"
+          },
+          "workspaceRoot" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "GroupStartView" : {
+        "properties" : {
+          "finished" : {
+            "type" : "boolean"
+          },
+          "group" : {
+            "type" : "string"
+          },
+          "messages" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "startedAt" : {
+            "$ref" : "#/components/schemas/Instant"
+          }
+        },
+        "type" : "object"
+      },
+      "GroupView" : {
+        "properties" : {
+          "bffs" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "members" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "sequentialStart" : {
+            "type" : "boolean"
+          },
+          "suggested" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "HiddenProjectView" : {
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ImageTagsView" : {
+        "properties" : {
+          "current" : {
+            "type" : "string"
+          },
+          "repository" : {
+            "type" : "string"
+          },
+          "serviceId" : {
+            "type" : "string"
+          },
+          "tags" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "Instant" : {
+        "examples" : [ "2022-03-10T16:15:50Z" ],
+        "format" : "date-time",
+        "type" : "string"
+      },
+      "Item" : {
+        "properties" : {
+          "mode" : {
+            "type" : "string"
+          },
+          "serviceId" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "KitoutInfoView" : {
+        "properties" : {
+          "configFile" : {
+            "type" : "string"
+          },
+          "logFile" : {
+            "type" : "string"
+          },
+          "stateDir" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "LibrariesRequest" : {
+        "properties" : {
+          "folders" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "kind" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "MessagesView" : {
+        "properties" : {
+          "messages" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "PathRequest" : {
+        "properties" : {
+          "path" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "PathStatusView" : {
+        "properties" : {
+          "exists" : {
+            "type" : "boolean"
+          },
+          "path" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "PickedComposeFileView" : {
+        "properties" : {
+          "environment" : {
+            "type" : "string"
+          },
+          "file" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "PortView" : {
+        "properties" : {
+          "conflict" : {
+            "type" : "boolean"
+          },
+          "port" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "services" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "PullOutcomeView" : {
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          },
+          "newCommits" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "serviceId" : {
+            "type" : "string"
+          },
+          "serviceName" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "RegistryLoginRequest" : {
+        "properties" : {
+          "password" : {
+            "type" : "string"
+          },
+          "username" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "RegistryStatusView" : {
+        "properties" : {
+          "detail" : {
+            "type" : "string"
+          },
+          "host" : {
+            "type" : "string"
+          },
+          "loggedIn" : {
+            "type" : "boolean"
+          },
+          "username" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "RemoteFindingView" : {
+        "properties" : {
+          "cleanUrl" : {
+            "type" : "string"
+          },
+          "key" : {
+            "type" : "string"
+          },
+          "remote" : {
+            "type" : "string"
+          },
+          "serviceId" : {
+            "type" : "string"
+          },
+          "serviceName" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "RemoveAllView" : {
+        "properties" : {
+          "removed" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "RequirementRuleView" : {
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "require" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "RequirementView" : {
+        "properties" : {
+          "detail" : {
+            "type" : "string"
+          },
+          "fix" : {
+            "type" : "string"
+          },
+          "found" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "note" : {
+            "type" : "string"
+          },
+          "outcome" : {
+            "type" : "string"
+          },
+          "problem" : {
+            "type" : "string"
+          },
+          "required" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "RequirementsView" : {
+        "properties" : {
+          "blocked" : {
+            "type" : "boolean"
+          },
+          "checkedAt" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "configured" : {
+            "type" : "boolean"
+          },
+          "results" : {
+            "items" : {
+              "$ref" : "#/components/schemas/RequirementView"
+            },
+            "type" : "array"
+          },
+          "team" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ResetOutcomeView" : {
+        "properties" : {
+          "done" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "problems" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "ResetPreviewView" : {
+        "properties" : {
+          "buildLogs" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "buildOutputs" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "builds" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "configFile" : {
+            "type" : "string"
+          },
+          "images" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "logBytes" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "logFiles" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "runningServices" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "secrets" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "ResetRequest" : {
+        "properties" : {
+          "buildOutput" : {
+            "type" : "boolean"
+          },
+          "builds" : {
+            "type" : "boolean"
+          },
+          "images" : {
+            "type" : "boolean"
+          },
+          "logs" : {
+            "type" : "boolean"
+          },
+          "settings" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "RunModeRequest" : {
+        "properties" : {
+          "mode" : {
+            "type" : "string"
+          },
+          "serviceIds" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "RunModeResultView" : {
+        "properties" : {
+          "changed" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "running" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "skipped" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "ScanRequest" : {
+        "properties" : {
+          "roots" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "ScanView" : {
+        "properties" : {
+          "added" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "found" : {
+            "items" : {
+              "$ref" : "#/components/schemas/ServiceView"
+            },
+            "type" : "array"
+          },
+          "outsideTeam" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "removed" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "SecretValueRequest" : {
+        "properties" : {
+          "scope" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ServiceIdsRequest" : {
+        "properties" : {
+          "serviceIds" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "ServiceSettingsView" : {
+        "properties" : {
+          "dockerArgs" : {
+            "type" : "string"
+          },
+          "healthCheck" : {
+            "type" : "boolean"
+          },
+          "image" : {
+            "type" : "string"
+          },
+          "mode" : {
+            "type" : "string"
+          },
+          "port" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "runtimeProfile" : {
+            "type" : "string"
+          },
+          "script" : {
+            "type" : "string"
+          },
+          "startTimeoutSeconds" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "volumes" : {
+            "items" : {
+              "$ref" : "#/components/schemas/VolumeView"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "ServiceView" : {
+        "properties" : {
+          "buildable" : {
+            "type" : "boolean"
+          },
+          "detail" : {
+            "type" : "string"
+          },
+          "dockerArgs" : {
+            "type" : "string"
+          },
+          "envCount" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "fullPath" : {
+            "type" : "string"
+          },
+          "hasPort" : {
+            "type" : "boolean"
+          },
+          "health" : {
+            "type" : "string"
+          },
+          "healthCheck" : {
+            "type" : "boolean"
+          },
+          "healthPath" : {
+            "type" : "string"
+          },
+          "healthPort" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "image" : {
+            "type" : "string"
+          },
+          "imageRepository" : {
+            "type" : "string"
+          },
+          "imageTag" : {
+            "type" : "string"
+          },
+          "mode" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "nativeBuild" : {
+            "type" : "boolean"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "port" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "portAdvisory" : {
+            "type" : "boolean"
+          },
+          "portOverride" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "routesToOthers" : {
+            "type" : "boolean"
+          },
+          "runModes" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "runtimeProfile" : {
+            "type" : "string"
+          },
+          "script" : {
+            "type" : "string"
+          },
+          "scripts" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "startTimeoutSeconds" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "startedAt" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "startupMillis" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "state" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "typeLabel" : {
+            "type" : "string"
+          },
+          "version" : {
+            "type" : "string"
+          },
+          "volumes" : {
+            "items" : {
+              "$ref" : "#/components/schemas/VolumeView"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "SettingsView" : {
+        "properties" : {
+          "build" : {
+            "$ref" : "#/components/schemas/Build"
+          },
+          "docker" : {
+            "$ref" : "#/components/schemas/Docker"
+          },
+          "doctor" : {
+            "$ref" : "#/components/schemas/Doctor"
+          },
+          "gitlab" : {
+            "$ref" : "#/components/schemas/GitLab"
+          },
+          "workspaceRoots" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "SetupProjectView" : {
+        "properties" : {
+          "description" : {
+            "type" : "string"
+          },
+          "kind" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "repo" : {
+            "type" : "string"
+          },
+          "serviceId" : {
+            "type" : "string"
+          },
+          "state" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "SetupView" : {
+        "properties" : {
+          "canCreate" : {
+            "type" : "boolean"
+          },
+          "complete" : {
+            "type" : "boolean"
+          },
+          "defaultLocation" : {
+            "type" : "string"
+          },
+          "editable" : {
+            "type" : "boolean"
+          },
+          "fileChecks" : {
+            "items" : {
+              "$ref" : "#/components/schemas/FileCheckView"
+            },
+            "type" : "array"
+          },
+          "localOnly" : {
+            "type" : "boolean"
+          },
+          "missingSecrets" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "presetProblem" : {
+            "type" : "string"
+          },
+          "projects" : {
+            "items" : {
+              "$ref" : "#/components/schemas/SetupProjectView"
+            },
+            "type" : "array"
+          },
+          "ready" : {
+            "type" : "boolean"
+          },
+          "requirements" : {
+            "$ref" : "#/components/schemas/RequirementsView"
+          },
+          "suggested" : {
+            "$ref" : "#/components/schemas/TeamSourceView"
+          },
+          "team" : {
+            "$ref" : "#/components/schemas/TeamStatusView"
+          },
+          "workspaceRoot" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "SyncStatusView" : {
+        "properties" : {
+          "ahead" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "behind" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "branch" : {
+            "type" : "string"
+          },
+          "localChanges" : {
+            "type" : "boolean"
+          },
+          "problem" : {
+            "type" : "string"
+          },
+          "pullable" : {
+            "type" : "boolean"
+          },
+          "serviceId" : {
+            "type" : "string"
+          },
+          "serviceName" : {
+            "type" : "string"
+          },
+          "upstream" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "TagRequest" : {
+        "properties" : {
+          "tag" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "TeamDraftRequest" : {
+        "properties" : {
+          "cloneFolder" : {
+            "type" : "string"
+          },
+          "composeFiles" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "envFile" : {
+            "type" : "string"
+          },
+          "gitlabHost" : {
+            "type" : "string"
+          },
+          "imagePath" : {
+            "type" : "string"
+          },
+          "recordRequirements" : {
+            "type" : "boolean"
+          },
+          "registryHost" : {
+            "type" : "string"
+          },
+          "team" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "TeamSourceRequest" : {
+        "properties" : {
+          "file" : {
+            "type" : "string"
+          },
+          "host" : {
+            "type" : "string"
+          },
+          "location" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "ref" : {
+            "type" : "string"
+          },
+          "repo" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "TeamSourceView" : {
+        "properties" : {
+          "file" : {
+            "type" : "string"
+          },
+          "host" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "ref" : {
+            "type" : "string"
+          },
+          "repo" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "TeamStatusView" : {
+        "properties" : {
+          "composeEnvironments" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "configured" : {
+            "type" : "boolean"
+          },
+          "groups" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "loadedAt" : {
+            "$ref" : "#/components/schemas/Instant"
+          },
+          "location" : {
+            "type" : "string"
+          },
+          "missingRepositories" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "presets" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "problems" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "secrets" : {
+            "items" : {
+              "$ref" : "#/components/schemas/TeamValueView"
+            },
+            "type" : "array"
+          },
+          "services" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "team" : {
+            "type" : "string"
+          },
+          "valid" : {
+            "type" : "boolean"
+          },
+          "variables" : {
+            "items" : {
+              "$ref" : "#/components/schemas/TeamValueView"
+            },
+            "type" : "array"
+          },
+          "version" : {
+            "type" : "string"
+          },
+          "warnings" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "TeamSuggestionsView" : {
+        "properties" : {
+          "allowed" : {
+            "type" : "boolean"
+          },
+          "cloneFolder" : {
+            "type" : "string"
+          },
+          "composeFiles" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "envFiles" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "gitlabHost" : {
+            "type" : "string"
+          },
+          "requirements" : {
+            "items" : {
+              "$ref" : "#/components/schemas/RequirementRuleView"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "TeamValueView" : {
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "scope" : {
+            "type" : "string"
+          },
+          "secret" : {
+            "type" : "boolean"
+          },
+          "set" : {
+            "type" : "boolean"
+          },
+          "value" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "TokenRequest" : {
+        "properties" : {
+          "token" : {
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "VolumeView" : {
+        "properties" : {
+          "containerPath" : {
+            "type" : "string"
+          },
+          "hostPath" : {
+            "type" : "string"
+          },
+          "readOnly" : {
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      }
+    }
+  },
+  "openapi" : "3.1.0",
+  "paths" : {
+    "/api/builds" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/BuildView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Builds",
+        "tags" : [ "Builds Resource" ]
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BuildBatchRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BuildBatchView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Build Many",
+        "tags" : [ "Builds Resource" ]
+      }
+    },
+    "/api/builds/current" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/CurrentBuildView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Current",
+        "tags" : [ "Builds Resource" ]
+      }
+    },
+    "/api/builds/current/remove" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CurrentBuildsRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BuildRemovalView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Remove Current",
+        "tags" : [ "Builds Resource" ]
+      }
+    },
+    "/api/builds/remove" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BuildIdsRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BuildRemovalView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Remove",
+        "tags" : [ "Builds Resource" ]
+      }
+    },
+    "/api/builds/{id}" : {
+      "delete" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BuildView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Cancel",
+        "tags" : [ "Builds Resource" ]
+      }
+    },
+    "/api/builds/{id}/log" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "text/event-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Log",
+        "tags" : [ "Builds Resource" ]
+      }
+    },
+    "/api/clone" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CloneRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CloneJobView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Clone",
+        "tags" : [ "Clone Resource" ]
+      }
+    },
+    "/api/clone/{id}" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CloneJobView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Job",
+        "tags" : [ "Clone Resource" ]
+      }
+    },
+    "/api/credentials" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CredentialStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Credentials",
+        "tags" : [ "Settings Resource" ]
+      }
+    },
+    "/api/credentials/token" : {
+      "delete" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CredentialStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Delete Token",
+        "tags" : [ "Settings Resource" ]
+      },
+      "put" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TokenRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CredentialStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Store Token",
+        "tags" : [ "Settings Resource" ]
+      }
+    },
+    "/api/docker" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "all",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DockerOverviewView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Overview",
+        "tags" : [ "Docker Resource" ]
+      }
+    },
+    "/api/docker/browse" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "path",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ComposeBrowseView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Browse",
+        "tags" : [ "Docker Resource" ]
+      }
+    },
+    "/api/docker/environments/{id}/down" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ComposeJobView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Down",
+        "tags" : [ "Docker Resource" ]
+      }
+    },
+    "/api/docker/environments/{id}/up" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ComposeJobView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Up",
+        "tags" : [ "Docker Resource" ]
+      }
+    },
+    "/api/docker/files" : {
+      "delete" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "path",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        },
+        "summary" : "Forget",
+        "tags" : [ "Docker Resource" ]
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PathRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PickedComposeFileView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Pick",
+        "tags" : [ "Docker Resource" ]
+      }
+    },
+    "/api/docker/jobs/{id}" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ComposeJobView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Job Status",
+        "tags" : [ "Docker Resource" ]
+      }
+    },
+    "/api/docker/jobs/{id}/log" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "text/event-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Job Log",
+        "tags" : [ "Docker Resource" ]
+      }
+    },
+    "/api/doctor" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "group",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DoctorReportView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Doctor",
+        "tags" : [ "Doctor Resource" ]
+      }
+    },
+    "/api/env/shared" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/EnvVarView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Shared",
+        "tags" : [ "Environment Resource" ]
+      },
+      "put" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EnvRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/EnvVarView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Save Shared",
+        "tags" : [ "Environment Resource" ]
+      }
+    },
+    "/api/env/shared/import" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EnvImportRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EnvImportView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Import Shared",
+        "tags" : [ "Environment Resource" ]
+      }
+    },
+    "/api/folders" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "path",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FolderListingView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Folders",
+        "tags" : [ "Workspace Resource" ]
+      }
+    },
+    "/api/folders/preview" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "path",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FolderPreviewView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Preview",
+        "tags" : [ "Workspace Resource" ]
+      }
+    },
+    "/api/git/check" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ServiceIdsRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/SyncStatusView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Check",
+        "tags" : [ "Git Sync Resource" ]
+      }
+    },
+    "/api/git/clean-remotes" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "group",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/CleanupOutcomeView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Clean",
+        "tags" : [ "Doctor Resource" ]
+      }
+    },
+    "/api/git/pull" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ServiceIdsRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/PullOutcomeView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Pull",
+        "tags" : [ "Git Sync Resource" ]
+      }
+    },
+    "/api/git/remote-credentials" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "group",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/RemoteFindingView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Findings",
+        "tags" : [ "Doctor Resource" ]
+      }
+    },
+    "/api/gitlab/projects" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "group",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/CloneCandidateView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Projects",
+        "tags" : [ "Clone Resource" ]
+      }
+    },
+    "/api/groups" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Groups",
+        "tags" : [ "Groups Resource" ]
+      }
+    },
+    "/api/groups/{name}" : {
+      "delete" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        },
+        "summary" : "Delete",
+        "tags" : [ "Groups Resource" ]
+      },
+      "put" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/GroupView"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GroupView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Save",
+        "tags" : [ "Groups Resource" ]
+      }
+    },
+    "/api/groups/{name}/start" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GroupStartView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Start Progress",
+        "tags" : [ "Groups Resource" ]
+      },
+      "post" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "force",
+          "schema" : {
+            "default" : false,
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GroupStartView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Start",
+        "tags" : [ "Groups Resource" ]
+      }
+    },
+    "/api/groups/{name}/stop" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MessagesView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Stop",
+        "tags" : [ "Groups Resource" ]
+      }
+    },
+    "/api/hidden-projects" : {
+      "delete" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "path",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        },
+        "summary" : "Restore",
+        "tags" : [ "Workspace Resource" ]
+      },
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/HiddenProjectView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Hidden",
+        "tags" : [ "Workspace Resource" ]
+      }
+    },
+    "/api/kitout" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/KitoutInfoView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Info",
+        "tags" : [ "Kitout Resource" ]
+      }
+    },
+    "/api/kitout/log" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "lines",
+          "schema" : {
+            "default" : 500,
+            "format" : "int32",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "text/event-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Log",
+        "tags" : [ "Kitout Resource" ]
+      }
+    },
+    "/api/ports" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "group",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/PortView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Ports",
+        "tags" : [ "Groups Resource" ]
+      }
+    },
+    "/api/registry" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RegistryStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Status",
+        "tags" : [ "Registry Resource" ]
+      }
+    },
+    "/api/registry/login" : {
+      "delete" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RegistryStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Logout",
+        "tags" : [ "Registry Resource" ]
+      },
+      "put" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RegistryLoginRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RegistryStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Login",
+        "tags" : [ "Registry Resource" ]
+      }
+    },
+    "/api/requirements" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RequirementsView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Requirements",
+        "tags" : [ "Team Resource" ]
+      }
+    },
+    "/api/requirements/check" : {
+      "post" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RequirementsView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Check Again",
+        "tags" : [ "Team Resource" ]
+      }
+    },
+    "/api/reset" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResetPreviewView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Preview",
+        "tags" : [ "Reset Resource" ]
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ResetRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResetOutcomeView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Reset",
+        "tags" : [ "Reset Resource" ]
+      }
+    },
+    "/api/scan" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ScanRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ScanView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Scan",
+        "tags" : [ "Services Resource" ]
+      }
+    },
+    "/api/services" : {
+      "delete" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RemoveAllView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Remove All",
+        "tags" : [ "Workspace Resource" ]
+      },
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/ServiceView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Services",
+        "tags" : [ "Services Resource" ]
+      }
+    },
+    "/api/services/run-mode" : {
+      "put" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RunModeRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RunModeResultView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Run Mode",
+        "tags" : [ "Workspace Resource" ]
+      }
+    },
+    "/api/services/{id}" : {
+      "delete" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        },
+        "summary" : "Remove",
+        "tags" : [ "Workspace Resource" ]
+      },
+      "get" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ServiceView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Service",
+        "tags" : [ "Services Resource" ]
+      }
+    },
+    "/api/services/{id}/build" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BuildRequestView"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BuildView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Build",
+        "tags" : [ "Builds Resource" ]
+      }
+    },
+    "/api/services/{id}/env" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/EnvVarView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Service",
+        "tags" : [ "Environment Resource" ]
+      },
+      "put" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EnvRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/EnvVarView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Save Service",
+        "tags" : [ "Environment Resource" ]
+      }
+    },
+    "/api/services/{id}/env/import" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EnvImportRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EnvImportView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Import Service",
+        "tags" : [ "Environment Resource" ]
+      }
+    },
+    "/api/services/{id}/image-tag" : {
+      "put" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TagRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ServiceView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Choose Tag",
+        "tags" : [ "Registry Resource" ]
+      }
+    },
+    "/api/services/{id}/image-tags" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ImageTagsView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Tags",
+        "tags" : [ "Registry Resource" ]
+      }
+    },
+    "/api/services/{id}/logs" : {
+      "get" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "in" : "query",
+          "name" : "lines",
+          "schema" : {
+            "default" : 300,
+            "format" : "int32",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "text/event-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Logs",
+        "tags" : [ "Services Resource" ]
+      }
+    },
+    "/api/services/{id}/restart" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ServiceView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Restart",
+        "tags" : [ "Services Resource" ]
+      }
+    },
+    "/api/services/{id}/settings" : {
+      "put" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ServiceSettingsView"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ServiceView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Update Settings",
+        "tags" : [ "Services Resource" ]
+      }
+    },
+    "/api/services/{id}/start" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ServiceView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Start",
+        "tags" : [ "Services Resource" ]
+      }
+    },
+    "/api/services/{id}/stop" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ServiceView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Stop",
+        "tags" : [ "Services Resource" ]
+      }
+    },
+    "/api/settings" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SettingsView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Settings",
+        "tags" : [ "Settings Resource" ]
+      },
+      "put" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SettingsView"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SettingsView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Update",
+        "tags" : [ "Settings Resource" ]
+      }
+    },
+    "/api/setup" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SetupView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Status",
+        "tags" : [ "Setup Resource" ]
+      }
+    },
+    "/api/setup/check" : {
+      "post" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SetupView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Check",
+        "tags" : [ "Setup Resource" ]
+      }
+    },
+    "/api/setup/clone" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "light",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CloneJobView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Clone Missing",
+        "tags" : [ "Setup Resource" ]
+      }
+    },
+    "/api/setup/local" : {
+      "post" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ScanView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Load Local",
+        "tags" : [ "Setup Resource" ]
+      }
+    },
+    "/api/team" : {
+      "delete" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TeamStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Forget",
+        "tags" : [ "Team Resource" ]
+      },
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TeamStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Status",
+        "tags" : [ "Team Resource" ]
+      },
+      "put" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TeamSourceRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TeamStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Use",
+        "tags" : [ "Team Resource" ]
+      }
+    },
+    "/api/team/clone" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "light",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CloneJobView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Clone Missing",
+        "tags" : [ "Team Resource" ]
+      }
+    },
+    "/api/team/create" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TeamSuggestionsView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Suggestions",
+        "tags" : [ "Team Create Resource" ]
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TeamDraftRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TeamStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Create",
+        "tags" : [ "Team Create Resource" ]
+      }
+    },
+    "/api/team/export" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : { }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Export",
+        "tags" : [ "Team Create Resource" ]
+      }
+    },
+    "/api/team/libraries" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/LibrariesRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AddedLibrariesView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Add Libraries",
+        "tags" : [ "Team Create Resource" ]
+      }
+    },
+    "/api/team/refresh" : {
+      "post" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TeamStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Refresh",
+        "tags" : [ "Team Resource" ]
+      }
+    },
+    "/api/team/repositories" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/SetupProjectView"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Repositories",
+        "tags" : [ "Setup Resource" ]
+      }
+    },
+    "/api/team/repositories/clone" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "light",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "in" : "query",
+          "name" : "repo",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CloneJobView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Clone Repository",
+        "tags" : [ "Setup Resource" ]
+      }
+    },
+    "/api/team/repositories/pull" : {
+      "post" : {
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "repo",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PullOutcomeView"
+                }
+              }
+            },
+            "description" : "OK"
+          }
+        },
+        "summary" : "Pull Repository",
+        "tags" : [ "Setup Resource" ]
+      }
+    },
+    "/api/team/secrets/{name}" : {
+      "put" : {
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SecretValueRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TeamStatusView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Secret",
+        "tags" : [ "Team Resource" ]
+      }
+    },
+    "/api/team/services" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/FoldersRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AddedServicesView"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        },
+        "summary" : "Add Services",
+        "tags" : [ "Team Create Resource" ]
+      }
+    }
+  }
+}

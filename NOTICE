@@ -1,0 +1,8 @@
+kitout
+Copyright 2026 The kitout contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It is built on, and its packaged form includes, third-party software under their own licenses,
+among them Quarkus (Apache License 2.0), React and MUI (MIT License). The full list is in
+pom.xml and src/main/webui/package.json; their licenses come with each package.

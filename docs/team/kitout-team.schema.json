@@ -1,0 +1,543 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kitout-team.schema.json",
+  "title": "kitout team setup",
+  "description": "The team's shared kitout setup. Strings starting with <<REPLACE: must be replaced before kitout accepts the file.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "team",
+    "gitlab"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "notPlaceholder": {
+      "not": {
+        "pattern": "<<REPLACE"
+      }
+    },
+    "repo": {
+      "type": "string",
+      "description": "GitLab project path, e.g. acme/shop/orders",
+      "pattern": "^[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)+$"
+    },
+    "runMode": {
+      "enum": [
+        "IMAGE",
+        "JVM",
+        "NATIVE",
+        "IDE"
+      ]
+    },
+    "envName": {
+      "type": "string",
+      "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+    },
+    "variables": {
+      "type": "object",
+      "description": "Non-secret environment variables. Secrets go under 'secrets', by name only.",
+      "propertyNames": {
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+        "not": {
+          "const": "QUARKUS_PROFILE"
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "secrets": {
+      "type": "array",
+      "description": "Names of secret variables; every developer enters the value once, kitout keeps it in their keyring.",
+      "items": {
+        "$ref": "#/$defs/envName"
+      },
+      "uniqueItems": true
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "team": {
+      "type": "string",
+      "minLength": 1
+    },
+    "minKitoutVersion": {
+      "type": "string",
+      "description": "The oldest kitout that understands this file"
+    },
+    "git": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "e.g. github.com or gitlab.example.com; any git server works"
+        },
+        "provider": {
+          "enum": [
+            "gitlab",
+            "github",
+            "git"
+          ],
+          "description": "The kind of server. Left out: guessed from the host name (github / gitlab in it), else a plain git server"
+        },
+        "cloneProtocol": {
+          "enum": [
+            "https",
+            "ssh"
+          ],
+          "description": "Default for everyone; a developer may choose SSH"
+        },
+        "workspaceRoot": {
+          "type": "string",
+          "description": "Where clones go; the namespace is mirrored below it"
+        }
+      },
+      "description": "Where the projects live. Without a host, kitout works with what is on this machine only."
+    },
+    "gitlab": {
+      "$ref": "#/properties/git",
+      "description": "The older name of \"git\"; still read. Use \"git\" in new files."
+    },
+    "registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "e.g. images.example.com, optionally with a path prefix"
+        },
+        "imagePath": {
+          "type": "string",
+          "description": "{namespace}/{project} (default), {project}, {group}/{project}, {path}, or fixed text"
+        }
+      }
+    },
+    "requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enforcement": {
+          "enum": [
+            "block",
+            "warn"
+          ],
+          "description": "block: kitout stops until the machine meets every check"
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "require"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "enum": [
+                  "os",
+                  "arch",
+                  "java",
+                  "maven",
+                  "docker",
+                  "docker-compose",
+                  "node",
+                  "git",
+                  "memory"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "require": {
+                "type": "string",
+                "description": "24.04 (exact), 21.* (prefix), >=3.9.0 <4.0.0 (range), x86_64 (text)"
+              },
+              "distribution": {
+                "type": "string",
+                "description": "os only, e.g. ubuntu"
+              },
+              "vendors": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "Temurin",
+                    "OpenJDK",
+                    "Zulu",
+                    "Corretto",
+                    "GraalVM",
+                    "Microsoft",
+                    "Semeru",
+                    "Liberica",
+                    "SapMachine",
+                    "Oracle"
+                  ]
+                }
+              },
+              "unit": {
+                "type": "string"
+              },
+              "fix": {
+                "type": "string",
+                "description": "What the developer does when the check fails"
+              },
+              "enforceFrom": {
+                "$ref": "#/$defs/date",
+                "description": "Until this day a failure only warns"
+              }
+            }
+          }
+        }
+      }
+    },
+    "serviceDefaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "runMode": {
+          "$ref": "#/$defs/runMode"
+        },
+        "runtimeProfile": {
+          "type": "string"
+        },
+        "startTimeoutSeconds": {
+          "type": "integer",
+          "minimum": 10
+        }
+      }
+    },
+    "services": {
+      "type": "array",
+      "description": "One entry per microservice; every microservice has its own repository.",
+      "items": {
+        "type": "object",
+        "required": [
+          "repo"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "repo": {
+            "$ref": "#/$defs/repo"
+          },
+          "runMode": {
+            "$ref": "#/$defs/runMode"
+          },
+          "runtimeProfile": {
+            "type": "string"
+          },
+          "startTimeoutSeconds": {
+            "type": "integer",
+            "minimum": 10
+          },
+          "imagePath": {
+            "type": "string",
+            "description": "Only when this service's images are not where registry.imagePath says"
+          },
+          "variables": {
+            "$ref": "#/$defs/variables"
+          },
+          "secrets": {
+            "$ref": "#/$defs/secrets"
+          },
+          "healthCheck": {
+            "type": "boolean",
+            "description": "false: the service counts as started when its port answers, without asking its readiness check (e.g. a BFF whose health endpoint is blocked). Default true."
+          }
+        }
+      }
+    },
+    "repositories": {
+      "description": "Repositories the team needs that are not services, e.g. the one with the compose files. Cloned and pulled, never started.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "repo"
+        ],
+        "properties": {
+          "repo": {
+            "$ref": "#/$defs/repo"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "javaLibraries": {
+      "description": "Common Java libraries the services build against. Cloned and pulled with the team's repositories, never started as services.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "repo"
+        ],
+        "properties": {
+          "repo": {
+            "$ref": "#/$defs/repo"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "uiLibraries": {
+      "description": "Common UI libraries. Cloned and pulled with the team's repositories, never started as services.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "repo"
+        ],
+        "properties": {
+          "repo": {
+            "$ref": "#/$defs/repo"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "images": {
+      "description": "Services the team runs only from their registry image: no checkout, any language (another team's service, a Node or Python service). They start with their group, with a tag picker like any registry image.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "image",
+          "port"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]*$",
+            "description": "Its service id; groups name it like this"
+          },
+          "image": {
+            "type": "string",
+            "description": "Its repository, relative to the registry (other-team/payments) or with a host; no tag"
+          },
+          "port": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535,
+            "description": "The port it answers on (host networking)"
+          },
+          "healthPath": {
+            "type": "string",
+            "pattern": "^/",
+            "description": "Its readiness check, e.g. /q/health/ready; without it, started when the port answers"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "variables": {
+      "$ref": "#/$defs/variables"
+    },
+    "secrets": {
+      "$ref": "#/$defs/secrets"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "members"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/repo"
+            }
+          },
+          "bffs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/repo"
+            },
+            "description": "The group's entry points (e.g. a web and a mobile BFF), started together once the other members are up"
+          },
+          "bff": {
+            "$ref": "#/$defs/repo",
+            "description": "One BFF; the same as bffs with one entry (kept for older files)"
+          },
+          "sequentialStart": {
+            "type": "boolean"
+          },
+          "needs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Compose environments the group depends on"
+          }
+        }
+      }
+    },
+    "compose": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "environments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "files"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "repo",
+                        "path"
+                      ],
+                      "properties": {
+                        "repo": {
+                          "$ref": "#/$defs/repo"
+                        },
+                        "path": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "file"
+                      ],
+                      "description": "A file on one machine, below the home folder; for a team, prefer repo and path",
+                      "properties": {
+                        "file": {
+                          "type": "string",
+                          "pattern": "^(~/|/)"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "profiles": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              },
+              "autoStart": {
+                "type": "boolean",
+                "default": true,
+                "description": "kitout runs docker compose up -d for it when kitout starts and before a service starts"
+              }
+            }
+          }
+        }
+      }
+    },
+    "presets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          },
+          "compose": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "runModes": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/$defs/runMode"
+            }
+          },
+          "otherServices": {
+            "$ref": "#/$defs/runMode"
+          }
+        }
+      }
+    },
+    "build": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,32}$"
+          }
+        },
+        "nativeContainerBuild": {
+          "type": "boolean"
+        }
+      }
+    },
+    "doctor": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tokenScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "embeddedCredentialsAsErrorFrom": {
+          "$ref": "#/$defs/date"
+        }
+      }
+    }
+  }
+}

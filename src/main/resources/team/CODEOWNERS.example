@@ -1,0 +1,5 @@
+# Put this file at .gitlab/CODEOWNERS in the team repository that holds kitout-team.json,
+# and turn on "Require approval from code owners" for the default branch.
+# A change to the requirements then reaches every developer only after these people approved it.
+/kitout-team.json         @<<REPLACE: group or people who own the developer setup, e.g. acme/platform-leads>>
+/kitout-team.schema.json  @<<REPLACE: same owners>>

@@ -1,0 +1,146 @@
+{
+  "$schema": "./kitout-team.schema.json",
+  "schemaVersion": 1,
+  "team": "<<REPLACE: team name, e.g. acme-shop>>",
+  "minKitoutVersion": "0.1.0",
+
+  "git": {
+    "host": "<<REPLACE: git host (GitHub, GitLab or any git server), e.g. gitlab.example.com>>",
+    "cloneProtocol": "https",
+    "workspaceRoot": "~/work"
+  },
+  "registry": {
+    "host": "<<REPLACE: container registry, e.g. images.example.com>>",
+    "imagePath": "{project}"
+  },
+
+  "requirements": {
+    "enforcement": "block",
+    "checks": [
+      {
+        "id": "os", "name": "Ubuntu 24.04 LTS", "distribution": "ubuntu", "require": "24.04",
+        "fix": "This machine must run Ubuntu 24.04 LTS (not 24.10 or newer). Ask IT before upgrading or reinstalling."
+      },
+      {
+        "id": "arch", "name": "CPU architecture", "require": "x86_64",
+        "fix": "The service images are built for x86_64 (amd64); ARM machines are not supported."
+      },
+      {
+        "id": "java", "name": "Java 21 (Temurin or OpenJDK)", "require": "21.*", "vendors": ["Temurin", "OpenJDK"],
+        "fix": "Temurin: 'sdk list java', then 'sdk install java <21.x.y>-tem' and 'sdk default java <21.x.y>-tem'. OpenJDK: 'sudo apt install openjdk-21-jdk'. JAVA_HOME must point to the same Java. Open a new terminal afterwards."
+      },
+      {
+        "id": "maven", "name": "Maven 3.9", "require": ">=3.9.0 <4.0.0",
+        "fix": "'sdk install maven 3.9.11' and 'sdk default maven 3.9.11'. For a project's wrapper: './mvnw wrapper:wrapper -Dmaven=3.9.11', then commit the change."
+      },
+      {
+        "id": "docker", "name": "Docker Engine", "require": ">=28.5.2",
+        "fix": "'sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io' from Docker's apt repository (docs.docker.com/engine/install/ubuntu). If the daemon is not running: 'sudo systemctl start docker'."
+      },
+      {
+        "id": "docker-compose", "name": "Docker Compose plugin", "require": ">=2.24.0",
+        "fix": "'sudo apt-get install docker-compose-plugin'"
+      },
+      {
+        "id": "node", "name": "Node.js", "require": ">=22.23.4",
+        "fix": "'nvm install 22 && nvm alias default 22', then open a new terminal and start kitout from it."
+      },
+      {
+        "id": "git", "name": "git", "require": ">=2.43.0",
+        "fix": "'sudo apt-get install git'"
+      },
+      {
+        "id": "memory", "name": "Memory (MB)", "require": ">=16384",
+        "enforceFrom": "<<REPLACE: day from which this blocks, e.g. 2026-12-01; until then it only warns>>",
+        "fix": "16 GB of RAM are needed to run the stack and a native build. Ask IT for a memory upgrade."
+      }
+    ]
+  },
+
+  "serviceDefaults": {
+    "runMode": "IMAGE",
+    "runtimeProfile": "dev",
+    "startTimeoutSeconds": 120
+  },
+  "services": [
+    { "repo": "<<REPLACE: one entry per microservice repository, e.g. acme/shop/orders>>", "startTimeoutSeconds": 180 },
+    { "repo": "<<REPLACE: e.g. acme/shop/billing>>" },
+    { "repo": "<<REPLACE: e.g. acme/shop/bff>>" },
+    { "repo": "<<REPLACE: a second BFF, or remove this entry, e.g. acme/shop/mobile-bff>>", "healthCheck": false }
+  ],
+
+  "repositories": [
+    {
+      "repo": "<<REPLACE: the repository with the compose files and other infrastructure, e.g. acme/platform/infrastructure>>",
+      "description": "Compose files for MongoDB and the other containers; cloned and pulled, never started as a service"
+    }
+  ],
+  "javaLibraries": [
+    {
+      "repo": "<<REPLACE: a common Java library the services build against, or remove this list, e.g. acme/common/java-commons>>",
+      "description": "Shared DTOs and clients; cloned and pulled with the rest, never started"
+    }
+  ],
+  "uiLibraries": [
+    {
+      "repo": "<<REPLACE: a common UI library, or remove this list, e.g. acme/common/ui-components>>",
+      "description": "Shared UI components; cloned and pulled with the rest, never started"
+    }
+  ],
+  "images": [
+    {
+      "name": "payments",
+      "image": "<<REPLACE: a service you only run from its image, or remove this list, e.g. other-team/payments>>",
+      "port": 8090,
+      "healthPath": "/q/health/ready",
+      "description": "Another team's service; no checkout needed"
+    }
+  ],
+
+  "variables": {
+    "MONGO_HOST": "localhost",
+    "MONGO_PORT": "27017",
+    "MONGO_USERNAME": "<<REPLACE: the local Mongo user from the dev compose file, e.g. dev>>"
+  },
+  "secrets": ["MONGO_PASSWORD"],
+
+  "groups": [
+    {
+      "name": "shop",
+      "members": ["<<REPLACE: e.g. acme/shop/orders>>", "<<REPLACE: e.g. acme/shop/billing>>", "<<REPLACE: e.g. acme/shop/bff>>", "<<REPLACE: e.g. acme/shop/mobile-bff>>"],
+      "bffs": ["<<REPLACE: e.g. acme/shop/bff>>", "<<REPLACE: e.g. acme/shop/mobile-bff>>"],
+      "needs": ["dev"]
+    }
+  ],
+
+  "compose": {
+    "environments": [
+      {
+        "name": "dev",
+        "files": [{ "repo": "<<REPLACE: repository with the compose files, e.g. acme/platform/infrastructure>>", "path": "<<REPLACE: e.g. compose/docker-compose-dev.yml>>" }],
+        "profiles": [],
+        "autoStart": true,
+        "description": "MongoDB and the other containers the services expect"
+      }
+    ]
+  },
+
+  "presets": [
+    {
+      "name": "<<REPLACE: e.g. Work on orders>>",
+      "group": "shop",
+      "compose": ["dev"],
+      "runModes": { "<<REPLACE: e.g. acme/shop/orders>>": "IDE" },
+      "otherServices": "IMAGE"
+    }
+  ],
+
+  "build": {
+    "profiles": ["dev", "qa", "prod"],
+    "nativeContainerBuild": true
+  },
+  "doctor": {
+    "tokenScopes": ["read_api", "read_repository"],
+    "embeddedCredentialsAsErrorFrom": "2026-11-16"
+  }
+}
