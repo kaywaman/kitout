@@ -6,8 +6,8 @@ kitout runs on the developer's machine with their git and registry logins, so we
 
 Please **do not open a public issue**. Use GitHub's private reporting instead: the repository's
 **Security** tab, **Report a vulnerability**. Describe what an attacker can do, and how to reproduce it.
-You get an answer within a week; a fix and a release follow as fast as the problem asks for, and you
-are credited in the release notes unless you prefer not to be.
+
+kitout is maintained in spare time, without guaranteed response or fix times. Reports are read, and handled on a best-effort basis. If a problem cannot be fixed soon, it is published as a security advisory, so users can decide for themselves. Fixes from the community are very welcome. Reporters are credited unless they prefer not to be.
 
 ## What kitout protects, and how
 
