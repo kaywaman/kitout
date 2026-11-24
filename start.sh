@@ -12,11 +12,27 @@
 set -euo pipefail
 
 cd "$(dirname "$0")"
+
+# Started from the app menu or the dock: no terminal, and the desktop's environment, which lacks what
+# ~/.bashrc or ~/.zshrc set up (nvm, SDKMAN, a newer Node.js or Java on the PATH). Run once more through
+# the user's shell as an interactive shell, which reads ~/.bashrc or ~/.zshrc, so kitout sees the tools
+# as a new terminal does: as they are now, not as they were when install.sh ran.
+if [ -z "${KITOUT_SHELL_ENV:-}" ] && ! [ -t 1 ] && ! [ -t 2 ]; then
+  export KITOUT_SHELL_ENV=1
+  case "$(basename "${SHELL:-}")" in
+    bash|zsh|ksh|mksh) user_shell=$SHELL ;;
+    *) user_shell=$(command -v bash) ;;   # fish and others: bash reads ~/.bashrc, where nvm usually is
+  esac
+  if [ -n "$user_shell" ] && [ -x "$user_shell" ]; then
+    exec "$user_shell" -i -c 'exec "$0" "$@"' "$(pwd)/start.sh" "$@" </dev/null
+  fi
+fi
+
 JAR="$(pwd)/target/quarkus-app/quarkus-run.jar"
 PORT=7878   # quarkus.http.port of the packaged app
 URL="http://127.0.0.1:$PORT"
 
-# started from the app menu: add the tool paths of the terminal install.sh ran in (nvm, SDKMAN, ...)
+# a fallback: the tool paths of the terminal install.sh ran in, after everything above (never before)
 [ -r target/kitout-env.sh ] && . target/kitout-env.sh
 
 # no terminal (app menu, dock): problems go to a desktop notification, or nobody would see them
